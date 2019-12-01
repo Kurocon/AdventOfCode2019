@@ -21,7 +21,7 @@ def day(day_number):
 
 class AOCDay:
     creator = "Kevin"
-    year = 2018
+    year = 2019
     day_number = 0
     session_token = ""
     input_filename = ""

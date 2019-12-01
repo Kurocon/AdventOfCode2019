@@ -4,7 +4,7 @@ from days import AOCDay, day
 
 
 @day(1)
-class DayTemplate(AOCDay):
+class Day1(AOCDay):
     def common(self, input_data):
         pass
 

@@ -68,6 +68,7 @@ if __name__ == "__main__":
                 with open(newday_filename, 'r') as f:
                     lines = f.readlines()
                 lines = [x.replace("@day(0)", "@day({})".format(d)) for x in lines]
+                lines = [x.replace("class DayTemplate(AOCDay):", "class Day{}(AOCDay):".format(d)) for x in lines]
                 with open(newday_filename, 'w') as f:
                     f.writelines(lines)
 
