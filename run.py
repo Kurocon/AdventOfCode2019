@@ -60,7 +60,7 @@ if __name__ == "__main__":
                 except Exception as e:
                     traceback.print_exc()
         else:
-            if d == datetime.date.today().day:
+            if d == datetime.date.today().day or (len(sys.argv) >= 3 and sys.argv[2] == "create"):
                 # This is today, create it!
                 template_filename = os.path.join(os.path.dirname(__file__), "days/_template.py")
                 newday_filename = os.path.join(os.path.dirname(__file__), "days/day{}.py".format(d))
