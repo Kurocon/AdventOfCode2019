@@ -51,10 +51,12 @@ class Day8(AOCDay):
             for x in range(self.width):
                 self.final_image[-1].append(self.TRANSPARENT)
 
-        for i, layer in enumerate(self.image_data):
-            for y, line in enumerate(layer):
-                for x, item in enumerate(line):
+        for y in range(self.height):
+            for x in range(self.width):
+                for layer in self.image_data:
                     if self.final_image[y][x] == self.TRANSPARENT:
-                        self.final_image[y][x] = item
+                        if layer[y][x] != self.TRANSPARENT:
+                            self.final_image[y][x] = layer[y][x]
+                            break
 
         yield "\n".join("".join(x) for x in self.final_image).replace("0", " ").replace("1", "#").replace("2", " ")
