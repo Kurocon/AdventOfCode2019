@@ -292,9 +292,6 @@ WEST = 3
 @day(11)
 class Day11(AOCDay):
     virtual_machines: List[VirtualMachine] = []
-    test_input = """109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99"""
-    test_input2 = """1102,34915192,34915192,7,4,7,99,0"""
-    test_input3 = """104,1125899906842624,99"""
     num_vms = 1
 
     hull = defaultdict(lambda: (BLACK, False))
