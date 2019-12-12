@@ -1,9 +1,11 @@
 import math
+import time
 from functools import lru_cache
 
 from days import AOCDay, day
 
 DEBUG = False
+VISUALIZE = False
 
 ASTEROID = 1
 EMPTY = 0
@@ -135,13 +137,29 @@ class Day10(AOCDay):
     def num_asteroids_visible(self, starting_point):
         return len(list(self.asteroids_visible(starting_point)))
 
-    def print_field(self, asteriods=None):
+    def print_field(self, asteroids=None, base=None, target=None):
         for y in range(self.field_height):
             for x in range(self.field_width):
-                if asteriods:
-                    print("#" if (x, y) in asteriods else ".", end="")
+                if asteroids:
+                    if base or target:
+                        if (x, y) == base:
+                            print("@", end="")
+                        elif (x, y) == target:
+                            print("X", end="")
+                        else:
+                            print("#" if (x, y) in asteroids else ".", end="")
+                    else:
+                        print("#" if (x, y) in asteroids else ".", end="")
                 else:
-                    print("#" if self.field[y][x] == ASTEROID else ".", end="")
+                    if base or target:
+                        if (x, y) == base:
+                            print("@", end="")
+                        elif (x, y) == target:
+                            print("X", end="")
+                        else:
+                            print("#" if self.field[y][x] == ASTEROID else ".", end="")
+                    else:
+                        print("#" if self.field[y][x] == ASTEROID else ".", end="")
             print("")
 
     def part1(self, input_data):
@@ -169,6 +187,10 @@ class Day10(AOCDay):
 
         prev_asteroid_destroyed = None
         i = 1
+
+        if VISUALIZE:
+            self.print_field()
+            input("Please resize to fit and press enter to continue")
 
         if DEBUG:
             print("Listening post on {}".format(max))
@@ -200,7 +222,11 @@ class Day10(AOCDay):
                 self.print_field()
             if DEBUG:
                 print("Asteroid {} to destroy: {}, angle {}".format(i, smallest, smallest_angle))
-            if i == 200:
+            if VISUALIZE:
+                self.print_field(base=max, target=smallest)
+                print("")
+                time.sleep(0.1)
+            if i == 200 and not VISUALIZE:
                 yield (smallest[0] * 100) + smallest[1]
                 return
             self.field[smallest[1]][smallest[0]] = EMPTY
